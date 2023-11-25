@@ -1,0 +1,43 @@
+include<iostream>
+
+using namespace std;
+
+struct node
+{
+    int key;
+    struct node *left,*right;
+};
+typedef struct node node;
+node* createnode(int data)
+{
+    node* newnode=new node;
+    newnode->left=NULL;
+    newnode->right=NULL;
+    return newnode;
+}
+int height(node* root)
+{
+    if(root==NULL)
+    {
+        return 0;
+    }
+
+    int lh=height(root->left);
+    int rh=height(root->right);
+
+    return 1+max(lh,rh);
+}
+int main()
+{
+    node *root=createnode(5);
+    root->left=createnode(2);
+    root->right=createnode(1);
+    root->left->right=createnode(10);
+    root->right->left=createnode(3);
+    root->right->left->left=createnode(8);
+    root->right->left->right=createnode(11);
+    root->right->right=createnode(4);
+
+    cout<<"Height of binary tree is:"<<height(root);
+    return 0;
+}
